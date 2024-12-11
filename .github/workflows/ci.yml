@@ -51,17 +51,22 @@ jobs:
           npm ci && npm run build
           cp dist/index.html dist/404.html
 
-      - name: Update dist artifact
-        uses: actions/upload-artifact@v4
+      - name: Update pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: package
           path: dist/
-          
   deploy:
     needs: build
     permissions:
+      pages: write
       id-token: write
-    runs-on: ubuntu-latest
     environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
       name: production
       url: https://pizza.newdenim.click
