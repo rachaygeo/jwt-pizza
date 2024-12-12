@@ -49,8 +49,8 @@ jobs:
       - name: Deploy to Production
         id: deployment
         uses: actions/deploy-pages@v4
-      - name: List files
-        run: ls -R
+      - name: Verify S3 Permissions
+        run: aws s3 ls s3://pizza.newdenim.click
       - name: Push to AWS S3
         # Append the version to the path
         run: |
