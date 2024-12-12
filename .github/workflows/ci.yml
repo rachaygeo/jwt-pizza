@@ -49,6 +49,8 @@ jobs:
       - name: Deploy to Production
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: List files
+        run: ls -R
       - name: Push to AWS S3
         # Append the version to the path
         run: |
